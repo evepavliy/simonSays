@@ -15,10 +15,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var simonLabel: UILabel!
     @IBOutlet weak var startGameLabel: UIButton!
     
+    var timer  = Timer()
+    var simonTimer = Timer()
+    
+    var timeInt = 20
+    var scoreInt = 0
+    var modeInt = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        simonLabel.layer.cornerRadius = 10
+        
     }
 
     @IBAction func startGameAction(_ sender: Any) {
