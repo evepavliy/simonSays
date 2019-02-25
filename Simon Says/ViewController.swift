@@ -62,6 +62,14 @@ class ViewController: UIViewController {
             
         }
         
+        if timeInt == 0 {
+            
+             timeInt = 20
+             scoreInt = 0
+             modeInt = 0
+            
+        }
+        
     
     }
     
@@ -81,6 +89,7 @@ class ViewController: UIViewController {
             
             startGameLabel.isEnabled = true
             startGameLabel.alpha = 1
+            startGameLabel.setTitle("Restart Game", for: UIControl.State.normal)
             
             
             
