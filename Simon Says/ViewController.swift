@@ -29,6 +29,22 @@ class ViewController: UIViewController {
         
         simonLabel.layer.cornerRadius = 10
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestures(sender:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestures(sender:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestures(sender:)))
+        swipeUp.direction = UISwipeGestureRecognizer.Direction.up
+        self.view.addGestureRecognizer(swipeUp)
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeGestures(sender:)))
+        swipeDown .direction = UISwipeGestureRecognizer.Direction.down
+        self.view.addGestureRecognizer(swipeDown)
+        
     }
 
     @IBAction func startGameAction(_ sender: Any) {
@@ -36,6 +52,10 @@ class ViewController: UIViewController {
         if timeInt == 20 {
             
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true )
+            
+            self.simonSays()
+            
+            modeInt = 1
             
         }
         
@@ -51,11 +71,13 @@ class ViewController: UIViewController {
             
             timer.invalidate()
             
+            modeInt = 0
+            
             
         }
     }
     
-    func simonSays() {
+    @objc func simonSays() {
         
         let array = [ "Simon says swipe right",
                           "Simon says swipe left",
@@ -70,6 +92,39 @@ class ViewController: UIViewController {
         // count items in array and pick a random number
         let randomWord = Int(arc4random_uniform(UInt32(array.count)))
         simonLabel.text = String(array[randomWord])
+        
+        
+        simonTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(simonSays), userInfo: nil, repeats: false)
+        
+    }
+    
+    @objc func swipeGestures(sender : UISwipeGestureRecognizer) {
+        
+        if modeInt == 1 {
+            
+            if sender.direction == UISwipeGestureRecognizer.Direction.right {
+                simonTimer.invalidate() // so user won't lose point while swiping and labels got updated
+                
+                if simonLabel.text == "Simon says swipe right" {
+                    
+                    scoreInt += 1
+                    scoreLabel.text = String("Score : \(scoreInt)")
+                    
+                    self.simonSays()
+                    
+                } else {
+                    
+                    scoreInt -= 1
+                    scoreLabel.text = String("Score : \(scoreInt)")
+                    
+                    self.simonSays()
+                    
+                }
+            }
+            
+        }
+        
+        
     }
     
 }
