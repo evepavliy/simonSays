@@ -79,6 +79,10 @@ class ViewController: UIViewController {
             
             modeInt = 0
             
+            startGameLabel.isEnabled = true
+            startGameLabel.alpha = 1
+            
+            
             
         }
     }
