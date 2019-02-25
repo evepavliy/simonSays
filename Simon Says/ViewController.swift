@@ -32,6 +32,44 @@ class ViewController: UIViewController {
     }
 
     @IBAction func startGameAction(_ sender: Any) {
+        
+        if timeInt == 20 {
+            
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true )
+            
+        }
+        
+    
+    }
+    
+    @objc func updateTimer() {
+        
+        timeInt -= 1
+        timeLabel.text = String("Time : \(timeInt)")
+        
+        if timeInt == 0 {
+            
+            timer.invalidate()
+            
+            
+        }
+    }
+    
+    func simonSays() {
+        
+        let array = [ "Simon says swipe right",
+                          "Simon says swipe left",
+                          "Simon says swipe up",
+                          "Simon says swipe down",
+                          "Swipe right",
+                          "Swipe left",
+                          "Swipe up",
+                          "Swipe down"
+                        ]
+        
+        // count items in array and pick a random number
+        let randomWord = Int(arc4random_uniform(UInt32(array.count)))
+        simonLabel.text = String(array[randomWord])
     }
     
 }
