@@ -70,6 +70,9 @@ class ViewController: UIViewController {
         if timeInt == 0 {
             
             timer.invalidate()
+            simonTimer.invalidate()
+            
+            simonLabel.text = "Game Over"
             
             modeInt = 0
             
@@ -120,7 +123,76 @@ class ViewController: UIViewController {
                     self.simonSays()
                     
                 }
+                
+                
             }
+            
+            
+            if sender.direction == UISwipeGestureRecognizer.Direction.left {
+                simonTimer.invalidate() // so user won't lose point while swiping and labels got updated
+                
+                if simonLabel.text == "Simon says swipe left" {
+                    
+                    scoreInt += 1
+                    scoreLabel.text = String("Score : \(scoreInt)")
+                    
+                    self.simonSays()
+                    
+                } else {
+                    
+                    scoreInt -= 1
+                    scoreLabel.text = String("Score : \(scoreInt)")
+                    
+                    self.simonSays()
+                    
+                }
+                
+            }
+                
+                
+                if sender.direction == UISwipeGestureRecognizer.Direction.up {
+                    simonTimer.invalidate() // so user won't lose point while swiping and labels got updated
+                    
+                    if simonLabel.text == "Simon says swipe up" {
+                        
+                        scoreInt += 1
+                        scoreLabel.text = String("Score : \(scoreInt)")
+                        
+                        self.simonSays()
+                        
+                    } else {
+                        
+                        scoreInt -= 1
+                        scoreLabel.text = String("Score : \(scoreInt)")
+                        
+                        self.simonSays()
+                        
+                    }
+                    
+                }
+                    
+                    
+                    if sender.direction == UISwipeGestureRecognizer.Direction.down {
+                        simonTimer.invalidate() // so user won't lose point while swiping and labels got updated
+                        
+                        if simonLabel.text == "Simon says swipe down" {
+                            
+                            scoreInt += 1
+                            scoreLabel.text = String("Score : \(scoreInt)")
+                            
+                            self.simonSays()
+                            
+                        } else {
+                            
+                            scoreInt -= 1
+                            scoreLabel.text = String("Score : \(scoreInt)")
+                            
+                            self.simonSays()
+                            
+                        }
+                
+            }
+        
             
         }
         
